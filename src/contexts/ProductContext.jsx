@@ -4,9 +4,8 @@ import {
   addProduct,
   deleteProduct,
 } from "../services/productGateway";
-// import productManager from "../services/productManagerBackend";
-// import productManager from "../services/productManagerLocalStorage";
-// import productManager from "../services/productManagerGateway";
+import GatewayFactory from "../services/gatewayFactory";
+
 export const ProductContext = createContext();
 
 export function ProductProvider({ children }) {
@@ -15,9 +14,11 @@ export function ProductProvider({ children }) {
     isLoading: true,
   });
 
+  
+
   useEffect(() => {
     setTimeout(async () => {
-      getProducts().then((data) =>
+      productGateway.getProducts().then((data) =>
         setState({
           products: data,
           isLoading: false,
